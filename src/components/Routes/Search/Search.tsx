@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import "./search.css"
-import { Map, MapMarker, useMap, } from 'react-kakao-maps-sdk';
+import { Map, MapMarker, useMap, CustomOverlayMap } from 'react-kakao-maps-sdk';
 
 import { db, ref } from '../../../db/firebase';
 import { set, get, child } from "firebase/database"
@@ -9,15 +9,16 @@ import storesInfo from '../../../Models/\bstoresInfo';
 
 interface MapMarkerProps {
     store: storesInfo;
-  }
+}
 
 function Search() {
-    
+
     useEffect(() => {
         fetch()
     }, [])
-    
+
     const [stores, setStores] = useState<storesInfo[]>([])
+    const [selectedStore, setSelectedStore] = useState<number>(0)
 
     const write = () => {
         console.log(stores)
@@ -30,43 +31,77 @@ function Search() {
         //     category: "중식"
         // });
     }
-    
+
     const fetch = async () => {
         const snapshot = await get(child(ref(db), `GonhchelinMap`))
         if (snapshot.exists()) {
             console.log(snapshot.val());
             const result = snapshot.val()
-            
+
             await setStores(Object.values(result))
         } else {
             console.log("No data available");
         }
     }
 
-    
 
-    const EventMarkerContainer: React.FC<MapMarkerProps>= ({store}) => {
+    const EventMarkerContainer: React.FC<MapMarkerProps & { index: number } & { selectedIndex: number } & { clickEvent: () => void }> = ({ store, index, selectedIndex, clickEvent }) => {
         const map = useMap()
         const [isVisible, setIsVisible] = useState(false)
-        const [isShow, setIsShow] = useState(false)
-        const handleMarkerClick = (marker: any) => {
+
+        const handleClickMarker = (marker: kakao.maps.Marker) => {
             map.panTo(marker.getPosition())
-            setIsShow(true)
-            console.log(isShow)
+            clickEvent()
         }
+
+        function linkToImage(link: string) {
+            const videoIdMatch = link.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+
+            if (videoIdMatch && videoIdMatch[1]) {
+                const videoId = videoIdMatch[1];
+                return `https://i1.ytimg.com/vi/${videoId}/mqdefault.jpg`
+            } else {
+                console.log("YouTube 동영상 ID를 찾을 수 없습니다.");
+            }
+        }
+
+        const returnMarker = () => {
+            if (selectedIndex === index) {
+                return (
+                    // <div className='clicked-marker'>
+                    //     <p>{store.storeName}</p>
+                    //     <p>{store.address}</p>
+                    //     <img src={linkToImage(store.youtubeLink)} loading='lazy'></img>
+                    // </div>
+                    <>
+                        <p>{store.storeName}</p>
+                        <p>{store.address}</p>
+                        <img src={linkToImage(store.youtubeLink)} loading='lazy'></img>
+                    </>
+
+
+                )
+            }
+            // else if (isVisible) {
+            //     return (
+            //         <p>{store.storeName}</p>
+            //     )
+            // }
+            return null
+        }
+
+        // NOTE 맵마커 오버레이 수정
         return (
             <MapMarker
                 position={{ lat: store.y, lng: store.x }} // 마커를 표시할 위치
                 // @ts-ignore
-                // onClick={(marker) => map.panTo(marker.getPosition())}
-                onClick={handleMarkerClick}
+                onClick={handleClickMarker}
+
                 onMouseOver={() => setIsVisible(true)}
                 onMouseOut={() => setIsVisible(false)}
             >
-                {isVisible && 
-                <div>
-                    <p>{store.storeName}</p>
-                </div>
+                {
+                    returnMarker()
                 }
             </MapMarker>
         )
@@ -98,11 +133,15 @@ function Search() {
                 style={{ width: "100%", height: "70vh" }}
             >
                 {
-                    stores.map((store) => {
-                        return (<EventMarkerContainer store={store}/>)
+                    stores.map((store, index) => {
+                        return (
+                            <>
+                                <EventMarkerContainer key={store.storeName} store={store} index={index} selectedIndex={selectedStore} clickEvent={() => setSelectedStore(index)} />
+                            </>
+
+                        )
                     })
                 }
-                
             </Map>
         </div>
     );

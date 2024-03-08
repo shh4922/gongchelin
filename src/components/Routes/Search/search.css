@@ -31,3 +31,22 @@
     padding: 5px 10px;
 
 }
+
+/* 클릭된후 마커 */
+.clicked-marker {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 150px;
+    height: 50px;
+    background-color: red;
+}
+.clicked-marker p {
+    font-size: 14px;
+}
+.clicked-marker img {
+    width: 100%;
+    /* height: 40px; */
+    object-fit: cover;
+}
