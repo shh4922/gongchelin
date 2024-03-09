@@ -15,7 +15,7 @@ function Navbar() {
                 <ul className='links'>
                     <li><NavLink to={"/"}>search</NavLink></li>
                     <li><NavLink to={"/info"}>Info</NavLink></li>
-                    <li><a href='https://www.youtube.com/playlist?list=https://www.youtube.com/@rhdgurwns8535/featured' target="_blank"><FontAwesomeIcon icon={faYoutube} /></a></li>
+                    <li><a className='youtube' href='https://www.youtube.com/playlist?list=https://www.youtube.com/@rhdgurwns8535/featured' target="_blank"><FontAwesomeIcon icon={faYoutube} /></a></li>
                 </ul>
             </div>
         </nav>
