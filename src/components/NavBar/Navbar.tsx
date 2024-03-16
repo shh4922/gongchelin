@@ -11,11 +11,11 @@ function Navbar() {
     return (
         <nav className='navbar'>
             <div className='navbar-content'>
-                <h1>공슐랭</h1>
+                <h1>공슐랭 가이드</h1>
                 <ul className='links'>
                     <li><NavLink to={"/"}>search</NavLink></li>
-                    <li><NavLink to={"/info"}>Info</NavLink></li>
-                    <li><a className='youtube' href='https://www.youtube.com/playlist?list=https://www.youtube.com/@rhdgurwns8535/featured' target="_blank"><FontAwesomeIcon icon={faYoutube} /></a></li>
+                    <li><NavLink to={"/info"}>info</NavLink></li>
+                    <li><a className='youtube' href='https://www.youtube.com/results?search_query=%EA%B3%B5%ED%98%81%EC%A4%80' target="_blank"><FontAwesomeIcon icon={faYoutube} /></a></li>
                 </ul>
             </div>
         </nav>

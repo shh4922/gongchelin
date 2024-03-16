@@ -4,11 +4,10 @@ import { Map, MapMarker, useMap, CustomOverlayMap } from 'react-kakao-maps-sdk';
 
 import { db, ref } from '../../../db/firebase';
 import { set, get, child } from "firebase/database"
-import { error } from 'console';
+
 import storesInfo from '../../../Models/\bstoresInfo';
 import EventMarkerContainer from '../../MapMarker/EventMarkerContainer';
-import CustomMapMarker from '../../Map/CustomMapMarker';
-
+import { getLargeThumbnail } from '../../../share/youtube';
 
 interface MapMarkerProps {
     store: storesInfo;
@@ -21,7 +20,7 @@ function Search() {
     }, [])
 
     const [stores, setStores] = useState<storesInfo[]>([])
-    const [selectedStore, setSelectedStore] = useState<number|null>(null)
+    const [selectedStore, setSelectedStore] = useState<number | null>(null)
 
     const fetch = async () => {
         const snapshot = await get(child(ref(db), `GonhchelinMap`))
@@ -43,41 +42,74 @@ function Search() {
         setSelectedStore(index)
         console.log("마커 클릭!")
     }
+    const handleSearch = () => {
+        console.log(selectedStore)
+    }
+
+    function detailComponent() {
+        if (selectedStore !== null) {
+            return (
+                <>
+                    <a href={stores[selectedStore].youtubeLink} rel="noreferrer noopener" target='_blank'><img src={getLargeThumbnail(stores[selectedStore].youtubeLink)} loading='lazy'></img></a>
+                    <p className='marker-category'>{stores[selectedStore].category}</p>
+                    <strong className='marker-name'>{stores[selectedStore].storeName}</strong>
+                    <span className='marker-address'>{stores[selectedStore].address}</span>
+                </>
+            )
+
+        }
+        return (
+            <p className='nomarker'>마커를 한번 선택해보세유! <br/>간짜장 먹고싶다..</p>
+        )
+    
+
+    }
 
     return (
         <div className="Search">
-            <h2>공슐랭 리스트</h2>
+            <h2>검색 및 리스트</h2>
 
             <section className='search-head'>
+
                 <input placeholder='상호명 또는 메뉴를 검색해주세요'></input>
-                <select>
-                    <option value="">전체</option>
-                    <option value="dog">한식</option>
-                    <option value="cat">중식</option>
-                    <option value="parrot">양식</option>
-                    <option value="hamster">일식</option>
-                    <option value="spider">회</option>
-                    <option value="goldfish">구이</option>
-                </select>
-                <button>검색</button>
+                <div className='mobile-button'>
+                    <button onClick={handleSearch}>검색</button>
+                    <select>
+                        <option value="">전체</option>
+                        <option value="dog">한식</option>
+                        <option value="cat">중식</option>
+                        <option value="parrot">양식</option>
+                        <option value="hamster">일식</option>
+                        <option value="spider">회</option>
+                        <option value="goldfish">구이</option>
+                    </select>
+                </div>
+
             </section>
 
-            <Map
-                className='search-map'
-                center={{ lat: 37.6703077, lng: 126.762765 }}
-                style={{ width: "100%", height: "85vh" }}
-                onClick={handleClickMap}
-            >
-                {    
-                    stores.map((store, index) => {
-                        return (
-                            <>
-                                <EventMarkerContainer key={store.storeName} store={store} index={index} selectedIndex={selectedStore} clickEvent={() => setSelectedStore(index)} />
-                            </>
-                        )
-                    })
-                }
-            </Map>
+            <section className='search-body'>
+                <Map
+                    className='search-map'
+                    center={{ lat: 37.6703077, lng: 126.762765 }}
+                    style={{ width: "100%", height: "70vh" }}
+                    onClick={handleClickMap}
+                >
+                    {
+                        stores.map((store, index) => {
+                            return (
+                                <>
+                                    <EventMarkerContainer key={store.storeName} store={store} index={index} selectedIndex={selectedStore} clickEvent={() => setSelectedStore(index)} />
+                                </>
+                            )
+                        })
+                    }
+                </Map>
+                <div className='search-detail'>
+                    {detailComponent()}
+                </div>
+            </section>
+
+
         </div>
     );
 }

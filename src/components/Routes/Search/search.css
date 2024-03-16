@@ -1,19 +1,26 @@
 .Search {
     width: 100%;
     max-width: 1920px;
-    padding: 0 30px;
+    padding: 0 100px;
+    height: 100%;
 }
 
 .Search h2 {
     padding: 10px 5px;
+    font-size: 24px;
+    margin-top: 10px;
+    font-family: "test-font";
+    color: rgba(0, 0, 0, 0.7);
 }
-.Search section {
+
+.Search .search-head {
     display: flex;
     gap: 20px;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
-.Search section > input {
+
+.Search .search-head>input {
     flex: 1;
     padding: 10px;
     font-size: var(--font-default);
@@ -22,24 +29,124 @@
     border-radius: 5px;
     box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.5);
 }
-.Search section select {
+
+.Search .search-head .mobile-button {
+    display: flex;
+    gap: 20px;
+}
+
+.Search .search-head .mobile-button select {
     border: 1px solid gray;
     border-radius: 5px;
     outline: none;
     font-size: var(--font-default);
-    padding: 5px 10px;
+    padding: 5px 15px;
 }
-.Search section > button {
+
+.Search .search-head .mobile-button > button {
     border: none;
     outline: none;
-    padding: 8px 12px;
+    padding: 8px 20px;
     font-size: var(--font-default);
     color: #fff;
     background-color: black;
     border-radius: 5px;
 }
-.Search .search-map {
-    border-radius: 20px;
+
+.Search .search-body {
+    display: flex;
+    align-items: flex-start;
+    
 }
 
-/* 클릭된후 마커 */
+.Search .search-body .search-map {
+    width: 100%;
+    max-width: 60%;
+    height: 60%;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px 0.4px rgba(0, 0, 0, 0.5);
+}
+
+.Search .search-body .search-detail {
+    margin-left: 20px;
+    max-width: 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.Search .search-body .search-detail a img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 5px
+}
+
+.Search .search-body .search-detail>p {
+    color: gray;
+}
+
+.Search .search-body .search-detail>strong {
+    font-size: 20px;
+}
+
+.Search .search-body .search-detail>span {
+    font-size: 14px;
+}
+.Search .search-body .search-detail .nomarker {
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 10px;
+}
+
+
+@media screen and (max-width: 1080px) {
+    .Search {
+        padding: 0 20px;
+    }
+
+    .Search h2 {
+        display: none;
+    }
+
+    .Search section {
+        margin-top: 20px;
+    }
+
+    .Search .search-body .search-map {
+        max-width: 100%;
+    }
+
+    .Search .search-body .search-detail {
+        display: none;
+    }
+
+}
+
+@media screen and (max-width: 760px) {
+    .Search .search-head>input {
+        width: 100%;
+    }
+    .Search .search-head {
+        display: flex;
+        flex-direction: column;
+        /* background-color: red; */
+    }
+    .Search .search-head .mobile-button {
+        width: 100%;
+        display: flex;
+        /* background-color: bisque; */
+    }
+    .Search .search-head .mobile-button select {
+        width: 100%;
+        text-align: center;
+    }
+    .Search .search-head .mobile-button > button {
+        width: 100%;
+    }
+}

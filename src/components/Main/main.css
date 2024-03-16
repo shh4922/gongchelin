@@ -1,6 +1,5 @@
 main {
-    /* background-color: red; */
-    height: 95vh;
+    height: 95%;
     display: flex;
     width: 100%;
     justify-content: center;
