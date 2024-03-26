@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    
     <meta charset="utf-8" />
     <!-- 아이콘 -->
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
@@ -13,6 +14,7 @@
       content="혁준상이 인정한 로컬맛집! 공슐랭!"
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -31,7 +33,7 @@
     <!-- 카카오맵 -->
     <script
   type="text/javascript"
-  src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5c6ed55980119571ec1ee0f4cecde093&libraries=services,clusterer"
+  src="//dapi.kakao.com/v2/maps/sdk.js?appkey=%REACT_APP_KAKAO_MAPKEY%&libraries=services,clusterer"
 ></script>
 
     <title>공슐랭</title>
@@ -39,5 +41,6 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    
   </body>
 </html>

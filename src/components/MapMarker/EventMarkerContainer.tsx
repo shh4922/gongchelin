@@ -2,21 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { Map, MapMarker, useMap, CustomOverlayMap } from 'react-kakao-maps-sdk';
 import storesInfo from '../../Models/\bstoresInfo';
 import "./mapmarker.css"
-import {getThumbnail} from '../../share/youtube';
+import { getThumbnail } from '../../share/youtube';
 
 interface MapMarkerProps {
     store: storesInfo;
 }
 
-
-
 const EventMarkerContainer: React.FC<MapMarkerProps & { index: number } & { selectedIndex: number | null } & { clickEvent: () => void }> = ({ store, index, selectedIndex, clickEvent }) => {
     const map = useMap()
     const [isVisible, setIsVisible] = useState(false)
-    const [myIndex, setIndex] = useState<number|null>(index)
+    const [myIndex, setIndex] = useState<number | null>(index)
 
     const handleClickMarker = (marker: kakao.maps.Marker) => {
-        
+
         clickEvent()
         map.panTo(marker.getPosition())
     }
@@ -37,7 +35,7 @@ const EventMarkerContainer: React.FC<MapMarkerProps & { index: number } & { sele
                     <CustomOverlayMap
                         position={{ lat: store.y, lng: store.x }} // 마커를 표시할 위치
                         yAnchor={2.4}
-                        // clickable={false}
+                    // clickable={false}
                     >
                         <p className='hover-marker'>{store.storeName}</p>
                     </CustomOverlayMap>
@@ -56,18 +54,11 @@ const EventMarkerContainer: React.FC<MapMarkerProps & { index: number } & { sele
                             <p className='marker-category'>{store.category}</p>
                             <strong className='marker-name'>{store.storeName}</strong>
                             <span className='marker-address'>{store.address}</span>
-
-
                         </div>
-
                     </CustomOverlayMap>
-                ) 
+                )
             }
-
-
         </>
-
-
         // </MapMarker>
     )
 }
