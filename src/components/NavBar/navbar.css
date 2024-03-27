@@ -15,10 +15,10 @@
     align-items: center;
     width: 100%;
     max-width: 1920px;
-    padding: 20px 0;
+    padding: 20px 40px;
 }
 .navbar-content > h1 {
-    font-size: 38px;
+    font-size: 30px;
     /* color: rgb(111, 150, 210); */
     color: rgb(175, 34, 175);
     filter: brightness(0.7);
@@ -50,6 +50,9 @@
     .navbar {
         height: 8%;
         padding: 0 5px;
+    }
+    .navbar-content {
+        padding: 20px 0;
     }
     .navbar-content > h1 {
         font-size: 26px;

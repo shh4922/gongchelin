@@ -13,8 +13,8 @@ function Navbar() {
             <div className='navbar-content'>
                 <h1>공슐랭 가이드</h1>
                 <ul className='links'>
-                    <li><NavLink to={"/"}>search</NavLink></li>
-                    <li><NavLink to={"/info"}>info</NavLink></li>
+                    {/* <li><NavLink to={"/"}>search</NavLink></li>
+                    <li><NavLink to={"/info"}>info</NavLink></li> */}
                     <li><a className='youtube' href='https://www.youtube.com/results?search_query=%EA%B3%B5%ED%98%81%EC%A4%80' target="_blank"><FontAwesomeIcon icon={faYoutube} /></a></li>
                 </ul>
             </div>

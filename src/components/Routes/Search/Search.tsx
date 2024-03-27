@@ -8,6 +8,7 @@ import { set, get, child } from "firebase/database"
 import storesInfo from '../../../Models/\bstoresInfo';
 import EventMarkerContainer from '../../MapMarker/EventMarkerContainer';
 import { getLargeThumbnail } from '../../../share/youtube';
+import SelectedDetail from '../../DetailInfo/SelectedDetail';
 
 interface MapMarkerProps {
     store: storesInfo;
@@ -15,19 +16,17 @@ interface MapMarkerProps {
 
 function Search() {
 
-    useEffect(() => {
-        fetch()
-    }, [])
-
     const [stores, setStores] = useState<storesInfo[]>([])
     const [selectedStore, setSelectedStore] = useState<number | null>(null)
 
-    const fetch = async () => {
+    useEffect(() => {
+        getStores()
+    }, [])
+
+    const getStores = async () => {
         const snapshot = await get(child(ref(db), `GonhchelinMap`))
         if (snapshot.exists()) {
-            console.log(snapshot.val());
             const result = snapshot.val()
-
             await setStores(Object.values(result))
         } else {
             console.log("No data available");
@@ -35,45 +34,17 @@ function Search() {
     }
 
     const handleClickMap = () => {
-        console.log("mapClick!")
         setSelectedStore(null)
     }
-    const handleMapMarker = (index: number) => {
-        setSelectedStore(index)
-        console.log("마커 클릭!")
-    }
-    const handleSearch = () => {
-        console.log(selectedStore)
-    }
 
-    function detailComponent() {
-        if (selectedStore !== null) {
-            return (
-                <>
-                    <a href={stores[selectedStore].youtubeLink} rel="noreferrer noopener" target='_blank'><img src={getLargeThumbnail(stores[selectedStore].youtubeLink)} loading='lazy'></img></a>
-                    <p className='marker-category'>{stores[selectedStore].category}</p>
-                    <strong className='marker-name'>{stores[selectedStore].storeName}</strong>
-                    <span className='marker-address'>{stores[selectedStore].address}</span>
-                </>
-            )
-
-        }
-        return (
-            <p className='nomarker'>마커를 한번 선택해보세유! <br/>간짜장 먹고싶다..</p>
-        )
-    
-
-    }
 
     return (
         <div className="Search">
-            <h2>검색 및 리스트</h2>
-
+            <h2>공슐랭 리스트</h2>
             <section className='search-head'>
-
-                <input placeholder='상호명 또는 메뉴를 검색해주세요'></input>
+                {/* <input placeholder='상호명 또는 메뉴를 검색해주세요'></input>
                 <div className='mobile-button'>
-                    <button onClick={handleSearch}>검색</button>
+                    <button>검색</button>
                     <select>
                         <option value="">전체</option>
                         <option value="dog">한식</option>
@@ -83,8 +54,7 @@ function Search() {
                         <option value="spider">회</option>
                         <option value="goldfish">구이</option>
                     </select>
-                </div>
-
+                </div> */}
             </section>
 
             <section className='search-body'>
@@ -105,11 +75,9 @@ function Search() {
                     }
                 </Map>
                 <div className='search-detail'>
-                    {detailComponent()}
+                    <SelectedDetail  stores={stores} selectedStore={selectedStore}/>                    
                 </div>
             </section>
-
-
         </div>
     );
 }

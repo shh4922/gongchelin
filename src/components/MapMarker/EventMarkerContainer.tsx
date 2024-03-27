@@ -23,12 +23,9 @@ const EventMarkerContainer: React.FC<MapMarkerProps & { index: number } & { sele
         <>
             <MapMarker
                 position={{ lat: store.y, lng: store.x }} // 마커를 표시할 위치
-                // @ts-ignore
                 onClick={handleClickMarker}
-
                 onMouseOver={() => setIsVisible(true)}
                 onMouseOut={() => setIsVisible(false)}
-
             />
             {
                 isVisible && myIndex !== selectedIndex && (
@@ -41,7 +38,6 @@ const EventMarkerContainer: React.FC<MapMarkerProps & { index: number } & { sele
                     </CustomOverlayMap>
                 )
             }
-
             {
                 myIndex === selectedIndex && (
                     <CustomOverlayMap
@@ -59,7 +55,6 @@ const EventMarkerContainer: React.FC<MapMarkerProps & { index: number } & { sele
                 )
             }
         </>
-        // </MapMarker>
     )
 }
 
