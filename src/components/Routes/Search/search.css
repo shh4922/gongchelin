@@ -79,32 +79,6 @@
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-.Search .search-body .search-detail a img {
-    width: 100%;
-    object-fit: cover;
-    border-radius: 5px
-}
-
-.Search .search-body .search-detail>p {
-    color: gray;
-}
-
-.Search .search-body .search-detail>strong {
-    font-size: 20px;
-}
-
-.Search .search-body .search-detail>span {
-    font-size: 14px;
-}
-.Search .search-body .search-detail .nomarker {
-    width: 300px;
-    height: 300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 5px 10px;
-}
-
 
 @media screen and (max-width: 1080px) {
     .Search {

@@ -1,6 +1,6 @@
 import storesInfo from "../../Models/\bstoresInfo";
 import { getLargeThumbnail } from "../../share/youtube";
-
+import "./selectedDetail.css"
 type store = {
     store: storesInfo;
 }
