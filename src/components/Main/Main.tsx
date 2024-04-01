@@ -1,4 +1,3 @@
-import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Info from '../Routes/Info/Info';
 import Search from '../Routes/Search/Search';

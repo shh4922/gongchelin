@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Map, MapMarker, useMap, CustomOverlayMap } from 'react-kakao-maps-sdk';
+import React, { useState } from 'react';
+import { MapMarker, useMap, CustomOverlayMap } from 'react-kakao-maps-sdk';
 import storesInfo from '../../Models/\bstoresInfo';
 import "./mapmarker.css"
 import { getThumbnail } from '../../share/youtube';

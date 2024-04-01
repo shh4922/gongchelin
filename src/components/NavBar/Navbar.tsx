@@ -1,8 +1,8 @@
-import React from 'react';
+
 import "./navbar.css"
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link, NavLink } from 'react-router-dom';
+
 
 
 function Navbar() {

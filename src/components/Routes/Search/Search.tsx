@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import "./search.css"
-import { Map, MapMarker, useMap, CustomOverlayMap } from 'react-kakao-maps-sdk';
-
+import { Map } from 'react-kakao-maps-sdk';
 import { db, ref } from '../../../db/firebase';
-import { set, get, child } from "firebase/database"
-
+import { get, child } from "firebase/database"
 import storesInfo from '../../../Models/\bstoresInfo';
 import EventMarkerContainer from '../../MapMarker/EventMarkerContainer';
-import { getLargeThumbnail } from '../../../share/youtube';
 import SelectedDetail from '../../DetailInfo/SelectedDetail';
 
 interface MapMarkerProps {
@@ -73,7 +70,7 @@ function Search() {
                 >
                     {
                         stores.map((store, index) => {
-                            if (!filteredCategory || store.category === filteredCategory) { 
+                            if (!filteredCategory || store.category === filteredCategory) {
                                 return (
                                     <EventMarkerContainer key={store.storeName} store={store} index={index} selectedIndex={selectedStore} clickEvent={() => setSelectedStore(index)} />
                                 );
@@ -84,7 +81,7 @@ function Search() {
                     }
                 </Map>
                 <div className='search-detail'>
-                    <SelectedDetail stores={stores} selectedStore={selectedStore}/>
+                    <SelectedDetail stores={stores} selectedStore={selectedStore} />
                 </div>
             </section>
         </div>
