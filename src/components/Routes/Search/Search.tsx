@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import "./search.css"
 import { Map } from 'react-kakao-maps-sdk';
-import { db, ref } from '../../../db/firebase';
-import { get, child } from "firebase/database"
+import { db} from '../../../db/firebase';
+import { get, child, ref } from "firebase/database"
 import storesInfo from '../../../Models/\bstoresInfo';
 import EventMarkerContainer from '../../MapMarker/EventMarkerContainer';
 import SelectedDetail from '../../DetailInfo/SelectedDetail';
