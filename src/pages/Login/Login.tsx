@@ -2,12 +2,14 @@ import React, { useState } from "react"
 import "./login.css"
 import { auth } from "../../db/firebase"
 import { signInWithEmailAndPassword,  } from "firebase/auth"
+import { useNavigate } from "react-router-dom"
 
 function Login() {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    
+    const navigator = useNavigate()
+
     const handleEmailInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value)
     }
@@ -19,7 +21,7 @@ function Login() {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
-                console.log(user)
+                navigator('/admin')            
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -29,8 +31,6 @@ function Login() {
     }
 
     return (
-        // gusgh4922@gmail.com
-        // rhdtbffodadmin00@@
         <article className="login">
             <h1>Login</h1>
             <form onSubmit={clickLogin}>

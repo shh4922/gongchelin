@@ -6,7 +6,6 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: "font-test";
   /* height: 100%; */
   /* background-color: aqua; */
 }
@@ -20,19 +19,19 @@ li {
 a {
   text-decoration: none;
 }
- 
+
 /* 폰트 */
+
+/* navbar 폰트 */
 @font-face {
   font-family: "font-navbar";
   src: url("./fonts/YEONGJUSeonbi.ttf");
 }
-@font-face {
+
+/* default폰트 지금은사용x */
+/* @font-face {
   font-family: 'font-default';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/KimjungchulMyungjo-Bold.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
-}
-@font-face {
-  font-family: "test-font";
-  src: url("./fonts/testFont.otf");
-}
+} */

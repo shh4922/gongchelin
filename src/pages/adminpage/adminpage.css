@@ -1,0 +1,35 @@
+.adminPage {
+    display: flex;
+    width: 100%;
+    max-width: 1000px;
+    /* background-color: red; */
+    justify-content: space-between;
+    align-items: flex-start;
+
+}
+
+.responseCard {
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin-top: 10px;
+}
+
+.adminPage .admin-resultsection {
+    background-color: aqua;
+    padding: 10px;
+}
+.adminPage .admin-resultsection > form {
+    display: flex;
+    flex-direction: column;
+}
+.adminPage .admin-resultsection > form > input {
+    padding: 10px;
+    font-size: var(--font-default);
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+}
