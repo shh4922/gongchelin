@@ -6,18 +6,11 @@ import axios, { AxiosResponse } from "axios"
 import { db, ref, set } from "../../db/firebase"
 import "./adminpage.css"
 import { error } from "console"
+import kakaoResponseDetail from "../../Models/kakaoResponseDetail"
+import kakaoSearchResponse from "../../Models/kakaoSearchResponse"
 
-interface kakaoSearchResponse {
-    documents: [kakaoResponseDetail]
-}
-interface kakaoResponseDetail {
-    address_name: string
-    category_name: string
-    place_name: string
-    road_address_name: string
-    x: string
-    y: string
-}
+
+
 
 function AdminPage() {
     const [currentUser, setCurrentUser] = useState(auth.currentUser)
