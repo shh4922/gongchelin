@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import "./search.css"
 import { Map } from 'react-kakao-maps-sdk';
 import { db } from '../../../db/firebase';
 import { get, child, ref } from "firebase/database"
@@ -7,8 +6,8 @@ import storesInfo from '../../../Models/\bstoresInfo';
 import EventMarkerContainer from '../../MapMarker/EventMarkerContainer';
 import SelectedDetail from '../../DetailInfo/SelectedDetail';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import "./search.scss"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import "./search.scss"
 
 // TODO 배열들 받아와서 allofStore에 저장해야함.
 // TODO State에 배열 넣어서 컨트롤하는법 찾아보기.
@@ -17,32 +16,47 @@ function Search() {
     const [stores, setStores] = useState<storesInfo[]>([]) // 모든식당정보
     const [selectedStore, setSelectedStore] = useState<storesInfo | null>(null) // 선택한 식당정보
     const [filteredCategory, setFilteredCategory] = useState<string>(""); // 카테고리 default는 전체
+    const [filteredYoutuber, setFilteredYoutuber] = useState<string>("")
 
     useEffect(() => {
-        getStores()
+        fetchStores()
     }, [])
 
-    const getStores = async () => {
-        getGongchelin()
-        // getFoogja()
+    const fetchStores = async () => {
+        try {
+            const [gongChelin, foogja] = await Promise.all([
+                getGongchelin(),
+                getFoogja()
+            ]);
+
+            const combineData: storesInfo[] = [...gongChelin, ...foogja];
+            setStores(combineData);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
     }
 
-    const getGongchelin = async () => {
+    // fetch() 공혁준데이터
+    const getGongchelin = async (): Promise<storesInfo[]> => {
         const snapshot = await get(child(ref(db), `Gongchelin`))
         if (snapshot.exists()) {
             const result = snapshot.val()
-            await setStores(Object.values(result))
+            return Object.values(result)
         } else {
             console.log("No data available");
+            return []
         }
     }
-    const getFoogja = async () => {
+
+    // fetch() 풍자데이터
+    const getFoogja = async (): Promise<storesInfo[]> => {
         const snapshot = await get(child(ref(db), `Foogja`))
         if (snapshot.exists()) {
             const result = snapshot.val()
-            await setStores(Object.values(result))
+            return Object.values(result)
         } else {
             console.log("No data available");
+            return []
         }
     }
 
@@ -50,6 +64,26 @@ function Search() {
     const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setFilteredCategory(event.target.value);
     };
+    // 유튜버 필터링
+    const handleYoutuberChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setFilteredYoutuber(event.target.value);
+    };
+
+    const showFilteredMap = (store: storesInfo) => {
+        // 모두일경우
+        // 유튜버만 선택
+        // 모두 필터
+        if (!filteredYoutuber || store.youtuberName === filteredYoutuber) {
+
+        }
+        if (!filteredYoutuber || !filteredCategory || store.youtuberName === filteredYoutuber || store.category === filteredCategory) {
+            return (
+                <EventMarkerContainer key={store.storeName} myStore={store} selectedStore={selectedStore} markerClickEvent={() => setSelectedStore(store)} />
+            );
+        } else {
+            return null;
+        }
+    }
 
     // 마커없는 맵 클릭
     const handleClickMap = () => {
@@ -59,7 +93,7 @@ function Search() {
     return (
         <article className="Search">
             <section className='search-option'>
-                <select>
+                <select onChange={handleYoutuberChange}>
                     <option value="">모든유튜버</option>
                     <option value="공혁준">공혁준</option>
                     <option value="풍자">또간집</option>
@@ -90,8 +124,11 @@ function Search() {
                     onClick={handleClickMap}
                 >
                     {
-                        stores.map((store, index) => {
-                            if (!filteredCategory || store.category === filteredCategory) {
+                        stores.map((store) => {
+                            const isFilteredByYoutuber = !filteredYoutuber || store.youtuberName === filteredYoutuber;
+                            const isFilteredByCategory = !filteredCategory || store.category === filteredCategory;
+
+                            if (isFilteredByYoutuber && isFilteredByCategory) {
                                 return (
                                     <EventMarkerContainer key={store.storeName} myStore={store} selectedStore={selectedStore} markerClickEvent={() => setSelectedStore(store)} />
                                 );

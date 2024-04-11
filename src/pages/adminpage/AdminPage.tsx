@@ -31,9 +31,10 @@ function AdminPage() {
         category: "",
         x: "",
         y: "",
-        youtubeLink: ""
+        youtubeLink: "",
+
     })
-    
+
 
     const navigator = useNavigate()
 
@@ -53,7 +54,7 @@ function AdminPage() {
                 Authorization: `KakaoAK ${process.env.REACT_APP_KAKAO_APIKEY}`
             }
         })
-        .then((res: AxiosResponse<kakaoSearchResponse>) => {
+            .then((res: AxiosResponse<kakaoSearchResponse>) => {
                 setSearchResult(res.data.documents)
                 console.log(res.data.documents)
             })
@@ -64,8 +65,8 @@ function AdminPage() {
 
     const submitToFirebase = (e: React.FormEvent) => {
         e.preventDefault()
-        
-        if(youtuber === '') {
+
+        if (youtuber === '') {
             alert("유튜버선택하셈")
             return
         }
@@ -76,16 +77,17 @@ function AdminPage() {
             category: selectedSearchResult.category,
             x: Number(selectedSearchResult.x),
             y: Number(selectedSearchResult.y),
-            youtubeLink: selectedSearchResult.youtubeLink
+            youtubeLink: selectedSearchResult.youtubeLink,
+
         })
-        .then(()=> {
-            alert("등록완료")
-        })
-        .catch((error)=> {
-            console.error(error)
-        }) 
-            
-        
+            .then(() => {
+                alert("등록완료")
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+
+
     }
 
     const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -110,48 +112,50 @@ function AdminPage() {
         }
         setSelectedSearchResult(info)
     }
-    
+
     const handleSelectYoutuber = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setYoutuber(e.target.value)
     }
 
     return (
-        <article className="adminPage">
-            <section className="admin-inputsection">
-                <form onSubmit={submitSearch}>
-                    <input value={search} onChange={(handleSearchInput)} placeholder="가게입력"></input>
-                    <button>전송</button>
-                </form>
-                <select onChange={handleSelectYoutuber}>
-                    <option value="Gongchelin">공혁준</option>
-                    <option value="Foogja">풍자</option>
-                </select>
-                {
-                    searchResult?.map((store) => {
-                        return (
-                            <section className="responseCard" onClick={() => { handleSelectedResult(store) }}>
-                                <p>{store.place_name}</p>
-                                <p>{store.address_name}</p>
-                                <p>{store.category_name}</p>
-                                <p>{store.road_address_name}</p>
-                                
-                            </section>
-                        )
-                    })
-                }
-            </section>
-            <section className="admin-resultsection">
-                <form onSubmit={submitToFirebase}>
-                    <input name="name" value={selectedSearchResult?.name} onChange={onChangeFormDaya} placeholder="식당이름"></input>
-                    <input name="address" value={selectedSearchResult?.address} onChange={onChangeFormDaya} placeholder="주소"></input>
-                    <input name="category" value={selectedSearchResult?.category} onChange={onChangeFormDaya} placeholder="카테고리"></input>
-                    <input name="x" value={selectedSearchResult?.x} onChange={onChangeFormDaya} placeholder="x좌표"></input>
-                    <input name="y" value={selectedSearchResult?.y} onChange={onChangeFormDaya} placeholder="y좌표"></input>
-                    <input name="youtubeLink" value={selectedSearchResult.youtubeLink} onChange={onChangeFormDaya} placeholder="유튜브링크"></input>
-                    <button>save</button>
-                </form>
-            </section>
-        </article>
+        !currentUser ? (null)
+            : (
+                <article className="adminPage">
+                    <section className="admin-inputsection">
+                        <form onSubmit={submitSearch}>
+                            <input value={search} onChange={(handleSearchInput)} placeholder="가게입력"></input>
+                            <button>전송</button>
+                        </form>
+                        <select onChange={handleSelectYoutuber}>
+                            <option value="Gongchelin">공혁준</option>
+                            <option value="Foogja">풍자</option>
+                        </select>
+                        {
+                            searchResult?.map((store) => {
+                                return (
+                                    <section className="responseCard" onClick={() => { handleSelectedResult(store) }}>
+                                        <p>{store.place_name}</p>
+                                        <p>{store.address_name}</p>
+                                        <p>{store.category_name}</p>
+                                        <p>{store.road_address_name}</p>
+                                    </section>
+                                )
+                            })
+                        }
+                    </section>
+                    <section className="admin-resultsection">
+                        <form onSubmit={submitToFirebase}>
+                            <input name="name" value={selectedSearchResult?.name} onChange={onChangeFormDaya} placeholder="식당이름"></input>
+                            <input name="address" value={selectedSearchResult?.address} onChange={onChangeFormDaya} placeholder="주소"></input>
+                            <input name="category" value={selectedSearchResult?.category} onChange={onChangeFormDaya} placeholder="카테고리"></input>
+                            <input name="x" value={selectedSearchResult?.x} onChange={onChangeFormDaya} placeholder="x좌표"></input>
+                            <input name="y" value={selectedSearchResult?.y} onChange={onChangeFormDaya} placeholder="y좌표"></input>
+                            <input name="youtubeLink" value={selectedSearchResult.youtubeLink} onChange={onChangeFormDaya} placeholder="유튜브링크"></input>
+                            <button>save</button>
+                        </form>
+                    </section>
+                </article>
+            )
     )
 }
 

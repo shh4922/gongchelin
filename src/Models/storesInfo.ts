@@ -5,6 +5,6 @@ interface storesInfo {
     x: number,
     y: number,
     youtubeLink: string
-
+    youtuberName: string
 }
 export default storesInfo
