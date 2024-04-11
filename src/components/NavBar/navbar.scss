@@ -1,0 +1,25 @@
+.navbar {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
+    // background-color: red;
+    
+    .navbar-content {
+        width: 100%;
+        max-width: 1920px;
+        // background-color: aliceblue;
+        text-align: center;
+        padding: 2rem 0;
+
+        a > h1 {
+            font-size: 3rem;
+            color: black;
+        }
+        p {
+            font-size: 1.5rem;
+            padding-top: 0.5rem;
+        }
+    }
+}

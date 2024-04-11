@@ -4,7 +4,9 @@ import Search from '../Routes/Search/Search';
 import Request from '../Routes/Request/Request';
 import "./main.css"
 import Login from '../../pages/Login/Login';
-import AdminPage from '../../pages/AdminPage/AdminPage';
+
+import AdminPage from '../../pages/adminpage/AdminPage';
+
 function Main() {
     return (
         <main>
@@ -14,6 +16,7 @@ function Main() {
                 <Route path='/request' element={<Request />}></Route>
                 <Route path='/login' element={<Login />}></Route>
                 <Route path='/admin' element={<AdminPage />}></Route>
+
             </Routes>
         </main>
     );

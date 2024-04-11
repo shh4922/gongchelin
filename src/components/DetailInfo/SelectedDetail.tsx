@@ -1,24 +1,27 @@
 import storesInfo from "../../Models/\bstoresInfo";
 import { getLargeThumbnail } from "../../share/youtube";
-import "./selectedDetail.css"
-type store = {
-    store: storesInfo;
+// import "./selectedDetail.css"
+import "./selectedDetail.scss"
+interface SelectedDetailProps {
+    selectedStore: storesInfo | null;
 }
 
-function SelectedDetail({stores, selectedStore}: {stores: storesInfo[], selectedStore:  number|null}) {
+function SelectedDetail({ selectedStore }: SelectedDetailProps) {
     if (selectedStore !== null) {
         return (
-            <>
-                <a href={stores[selectedStore].youtubeLink} rel="noreferrer noopener" target='_blank'><img src={getLargeThumbnail(stores[selectedStore].youtubeLink)} loading='lazy'></img></a>
-                <p className='marker-category'>{stores[selectedStore].category}</p>
-                <strong className='marker-name'>{stores[selectedStore].storeName}</strong>
-                <span className='marker-address'>{stores[selectedStore].address}</span>
-            </>
+            <div className="search-detail">
+                <section className="storeInfo">
+                    <p className='marker-category'>{selectedStore.category}</p>
+                    <strong className='marker-name'>{selectedStore.storeName}</strong>
+                    <span className='marker-address'>{selectedStore.address}</span>
+                </section>
+                <a href={selectedStore.youtubeLink} rel="noreferrer noopener" target='_blank'>
+                    <img src={getLargeThumbnail(selectedStore.youtubeLink)} loading='lazy'></img>
+                </a>
+            </div>
         )
     }
-    return (
-        <p className='nomarker'>마커를 한번 선택해보세유! <br/>간짜장 먹고싶다..</p>
-    )
+    return null
 }
 
 export default SelectedDetail
