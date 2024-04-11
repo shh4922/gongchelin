@@ -6,16 +6,14 @@ import { ref } from 'firebase/database';
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-    apiKey: process.env.REACT_APP_APPKRY,
-    // apiKey: "AIzaSyCqkeTOpgylf_Zv2w3oQ1pLUTnEFF0EpBE",
-    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
-
-    // projectId: process.env.REACT_APP_PROJECTID,
+    apiKey: "AIzaSyCqkeTOpgylf_Zv2w3oQ1pLUTnEFF0EpBE",
+    authDomain: "gongchelin-34240.firebaseapp.com",
+    databaseURL: "https://gongchelin-34240-default-rtdb.firebaseio.com",
     projectId: "gongchelin-34240",
-    storageBucket: process.env.REACT_APP_STORAGEBUCKET,
-    messagingSenderId: process.env.REACT_APP_MESSAGE_SENDERID,
-    appId: process.env.REACT_APP_APPID,
-    measurementId: process.env.REACT_APP_MEASUREMENTID
+    storageBucket: "gongchelin-34240.appspot.com",
+    messagingSenderId: "197848190812",
+    appId: "1:197848190812:web:13c8f5341551c788973b99",
+    measurementId: "G-342Y95XE9W"
 };
 
 // Initialize Firebase
