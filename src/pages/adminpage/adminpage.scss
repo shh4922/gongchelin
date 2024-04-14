@@ -1,0 +1,52 @@
+.adminPage {
+    display: flex;
+    width: 100%;
+    max-width: 1000px;
+    // background-color: red;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 20px;
+
+    .admin-inputSection {
+        display: flex;
+        flex-direction: column;
+        
+        form {
+            input {
+                padding: 10px;
+                font-size: var(--font-default);
+                border: none;
+                outline: none;
+                border-radius: 5px;
+                box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.5);
+                margin-bottom: 20px;
+                margin-right: 1rem;
+                
+            }
+            button {
+                border: none;
+                outline: none;
+                padding: 0.8rem 1rem;
+                border-radius: 8px;
+            }
+        }
+        
+
+        .responseCard {
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            margin-top: 10px;
+            p {
+                font-size: 1.2rem;
+            }
+            
+        }
+    }
+
+    .admin-resultsection{
+        display: flex;
+        flex-direction: column;
+    }
+}

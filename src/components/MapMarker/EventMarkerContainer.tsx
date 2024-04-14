@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { MapMarker, useMap, CustomOverlayMap } from 'react-kakao-maps-sdk';
 import storesInfo from '../../Models/\bstoresInfo';
-// import "./mapmarker.css"
 import { getThumbnail } from '../../share/youtube';
 import "./mapmarker.scss"
 interface MapMarkerProps {
@@ -31,7 +30,7 @@ const EventMarkerContainer: React.FC<MapMarkerProps> = ({ myStore, selectedStore
                 isNameVisible && (
                     <CustomOverlayMap
                         position={{ lat: myStore.y, lng: myStore.x }} // 마커를 표시할 위치
-                        yAnchor={2.4}
+                        yAnchor={2.6}
                     >
                         <p className='hover-marker'>{myStore.storeName}</p>
                     </CustomOverlayMap>
@@ -49,9 +48,10 @@ const EventMarkerContainer: React.FC<MapMarkerProps> = ({ myStore, selectedStore
                                 <img src={getThumbnail(myStore.youtubeLink)} loading='lazy'></img>
                             </a>
                             <div className='clicked-marker-info'>
-                                <p className='marker-category'>{myStore.category}</p>
+                                
                                 <strong className='marker-name'>{myStore.storeName}</strong>
-                                <p className='marker-address'>{myStore.address}</p>
+                                <p>{myStore.address}</p>
+                                <p>{myStore.eatedFood}</p>
                             </div>
 
                         </section>

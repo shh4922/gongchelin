@@ -9,8 +9,8 @@ function Navbar() {
     return (
         <header className='navbar'>
             <div className='navbar-content'>
-                <Link to={"/"}><h1>맛있는 길찾기</h1></Link>
-                <p>맛집이란 맛집은 모두 올려드립니다.</p>
+                <Link to={"/"}><h1>유튜브 맛집 지도</h1></Link>
+                <p>문의하기</p>
             </div>
         </header>
     );

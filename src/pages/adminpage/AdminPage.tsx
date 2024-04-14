@@ -1,22 +1,18 @@
 import React, { useEffect, useState } from "react"
 import { auth } from "../../db/firebase"
-import { signInWithEmailAndPassword, } from "firebase/auth"
 import { useNavigate } from "react-router-dom"
 import axios, { AxiosResponse } from "axios"
 import { db, ref, set } from "../../db/firebase"
-import "./adminpage.css"
-import { error } from "console"
+import "./adminpage.scss"
 import kakaoResponseDetail from "../../Models/kakaoResponseDetail"
 import kakaoSearchResponse from "../../Models/kakaoSearchResponse"
-
-
-
 
 function AdminPage() {
     const [currentUser, setCurrentUser] = useState(auth.currentUser)
     const [search, setSearch] = useState("")
     const [searchResult, setSearchResult] = useState<[kakaoResponseDetail]>()
     const [youtuber, setYoutuber] = useState("")
+    const navigator = useNavigate()
 
     const [selectedSearchResult, setSelectedSearchResult] = useState({
         name: "",
@@ -25,11 +21,8 @@ function AdminPage() {
         x: "",
         y: "",
         youtubeLink: "",
-
+        eatedFood: ""
     })
-
-
-    const navigator = useNavigate()
 
     useEffect(() => {
         if (!currentUser) {
@@ -40,6 +33,34 @@ function AdminPage() {
         }
     }, [])
 
+    const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearch(e.target.value)
+    }
+    const onChangeFormDaya = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target
+        setSelectedSearchResult(prevState => ({
+            ...prevState,
+            [name]: value
+        })
+        )
+    }
+    const handleSelectYoutuber = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setYoutuber(e.target.value)
+    }
+    const handleSelectedResult = (store: kakaoResponseDetail) => {
+        const info = {
+            name: store.place_name,
+            address: store.road_address_name,
+            category: store.category_name,
+            x: store.x,
+            y: store.y,
+            youtubeLink: "",
+            eatedFood: ""
+        }
+        setSelectedSearchResult(info)
+    }
+
+    // kakao식당검색
     const submitSearch = (e: React.FormEvent) => {
         e.preventDefault()
         axios.get<kakaoSearchResponse>(`https://dapi.kakao.com/v2/local/search/keyword?query=${search}`, {
@@ -56,14 +77,13 @@ function AdminPage() {
             })
     }
 
+    // 파이어베이스에 저장
     const submitToFirebase = (e: React.FormEvent) => {
         e.preventDefault()
-
         if (youtuber === '') {
             alert("유튜버선택하셈")
             return
         }
-
         set(ref(db, `${youtuber}/${selectedSearchResult.name}`), {
             storeName: selectedSearchResult.name,
             address: selectedSearchResult.address,
@@ -71,7 +91,8 @@ function AdminPage() {
             x: Number(selectedSearchResult.x),
             y: Number(selectedSearchResult.y),
             youtubeLink: selectedSearchResult.youtubeLink,
-
+            youtuberName: youtuber,
+            eatedFood: selectedSearchResult.eatedFood
         })
             .then(() => {
                 alert("등록완료")
@@ -79,42 +100,12 @@ function AdminPage() {
             .catch((error) => {
                 console.error(error)
             })
-
-
     }
-
-    const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearch(e.target.value)
-    }
-    const onChangeFormDaya = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target
-        setSelectedSearchResult(prevState => ({
-            ...prevState,
-            [name]: value
-        })
-        )
-    }
-    const handleSelectedResult = (store: kakaoResponseDetail) => {
-        const info = {
-            name: store.place_name,
-            address: store.road_address_name,
-            category: store.category_name,
-            x: store.x,
-            y: store.y,
-            youtubeLink: ""
-        }
-        setSelectedSearchResult(info)
-    }
-
-    const handleSelectYoutuber = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        setYoutuber(e.target.value)
-    }
-
     return (
         !currentUser ? (null)
             : (
                 <article className="adminPage">
-                    <section className="admin-inputsection">
+                    <section className="admin-inputSection">
                         <form onSubmit={submitSearch}>
                             <input value={search} onChange={(handleSearchInput)} placeholder="가게입력"></input>
                             <button>전송</button>
@@ -144,6 +135,7 @@ function AdminPage() {
                             <input name="x" value={selectedSearchResult?.x} onChange={onChangeFormDaya} placeholder="x좌표"></input>
                             <input name="y" value={selectedSearchResult?.y} onChange={onChangeFormDaya} placeholder="y좌표"></input>
                             <input name="youtubeLink" value={selectedSearchResult.youtubeLink} onChange={onChangeFormDaya} placeholder="유튜브링크"></input>
+                            <input name="eatedFood" value={selectedSearchResult.eatedFood} onChange={onChangeFormDaya} placeholder="먹은음식"></input>
                             <button>save</button>
                         </form>
                     </section>

@@ -11,11 +11,13 @@ function SelectedDetail({ selectedStore }: SelectedDetailProps) {
         return (
             <div className="search-detail">
                 <section className="storeInfo">
-                    <p className='marker-category'>{selectedStore.category}</p>
                     <strong className='marker-name'>{selectedStore.storeName}</strong>
                     <span className='marker-address'>{selectedStore.address}</span>
+                    <p className='marker-category'>{selectedStore.category}</p>
+                    <p>{selectedStore.eatedFood}</p>
                 </section>
                 <a href={selectedStore.youtubeLink} rel="noreferrer noopener" target='_blank'>
+                    
                     <img src={getLargeThumbnail(selectedStore.youtubeLink)} loading='lazy'></img>
                 </a>
             </div>

@@ -2,30 +2,42 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 10rem;
-    padding: 0 20rem;
-    background-color: rgba($color: #fff, $alpha: 0.7);
-    
-
+    position: absolute;
+    width: 40rem;
+    height: 15rem;
+    bottom: 0;
+    padding: 1rem 1rem;
+    z-index: 1;
+    background-color: rgba($color: #fff, $alpha: 1);
+    border-radius: 10px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
     .storeInfo {
         display: flex;
         flex-direction: column;
-        // background-color: red;
-        .marker-category {
-            font-size: 1.5rem;
-        }   
+        justify-content: flex-start;
+        height: 100%;
+        gap: 0.5rem;
         .marker-name {
-            font-size: 1.8rem;
-        }   
+            font-size: 2rem;
+        }
+
         .marker-address {
-            font-size: 1.5rem;
-        }    
+            font-size: 1.4rem;
+            color: gray;
+        }
+
+        .marker-category {
+            font-size: 1.4rem;
+            color: gray;
+        }
     }
 
     a {
-        height: 100%; 
         img {
-            height: 100%;
+            width: 200px;
+            height: auto;
+            object-fit: cover;
+            border-radius: 8px;
         }
     }
 }
@@ -33,5 +45,5 @@
 @media screen and (max-width: 720px) {
     .search-detail {
         display: none;
-    }   
+    }
 }

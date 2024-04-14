@@ -1,6 +1,7 @@
 main {
-    height: 95%;
     display: flex;
     width: 100%;
     justify-content: center;
+    height: 95%;
+    /* background-color: red; */
 }
