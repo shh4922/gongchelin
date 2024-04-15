@@ -92,9 +92,13 @@ function Search() {
                     <option value="한식">한식</option>
                     <option value="중식">중식</option>
                     <option value="일식">일식</option>
-                    <option value="구이">구이</option>
+                    <option value="양식">양식</option>
+                    <option value="아시아">아시아</option>
+                    <option value="구이">고기</option>
+                    <option value="해물">해물</option>
                     <option value="분식">분식</option>
                     <option value="면">면</option>
+                    <option value="디저트">디저트</option>
                 </select>
 
 

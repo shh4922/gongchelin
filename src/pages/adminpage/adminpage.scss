@@ -3,10 +3,11 @@
     width: 100%;
     max-width: 1000px;
     // background-color: red;
-    justify-content: space-between;
+    justify-content: center;
     align-items: flex-start;
     margin-top: 20px;
-
+    // background-color: aquamarine;
+    gap: 20rem;
     .admin-inputSection {
         display: flex;
         flex-direction: column;
