@@ -127,6 +127,7 @@ function AdminPage() {
                             })
                         }
                     </section>
+
                     <section className="admin-resultsection">
                         <form onSubmit={submitToFirebase}>
                             <input name="name" value={selectedSearchResult?.name} onChange={onChangeFormDaya} placeholder="식당이름"></input>
