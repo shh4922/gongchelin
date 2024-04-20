@@ -10,10 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import "./search.scss"
 import storesInfo from '../../Models/\bstoresInfo';
 
-// TODO 배열들 받아와서 allofStore에 저장해야함.
-// TODO State에 배열 넣어서 컨트롤하는법 찾아보기.
 function Search() {
-
     const [stores, setStores] = useState<storesInfo[]>([]) // 모든식당정보
     const [selectedStore, setSelectedStore] = useState<storesInfo | null>(null) // 선택한 식당정보
     const [filteredCategory, setFilteredCategory] = useState<string>(""); // 카테고리 default는 전체
@@ -70,6 +67,7 @@ function Search() {
     const handleYoutuberChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setFilteredYoutuber(event.target.value);
     };
+    // 검색 필터링
     const handleSearchInput = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchInput(event.target.value)
     }
@@ -100,13 +98,10 @@ function Search() {
                     <option value="면">면</option>
                     <option value="디저트">디저트</option>
                 </select>
-
-
                 <div className='search-input'>
                     <input value={searchInput} onChange={handleSearchInput} placeholder='음식종류를 입력하세요'></input>
                     <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon>
                 </div>
-
             </section>
 
             <section className='search-body'>
@@ -140,4 +135,4 @@ function Search() {
     );
 }
 
-export default Search;
+export default Search; 
