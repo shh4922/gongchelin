@@ -18,6 +18,11 @@ function Search() {
     const [searchInput, setSearchInput] = useState<string>("")
 
     useEffect(() => {
+        setMetaTags({
+            title: "유튜버 맛집 지도",
+            description: "유튜버들이 소개한 맛집정보를 제공합니다",
+            imageUrl: ""
+        })
         fetchStores()
     }, [])
 
