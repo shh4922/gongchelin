@@ -6,6 +6,7 @@ import { db, ref, set } from "../../db/firebase"
 import "./adminpage.scss"
 import kakaoResponseDetail from "../../Models/kakaoResponseDetail"
 import kakaoSearchResponse from "../../Models/kakaoSearchResponse"
+import { setMetaTags } from "../../metatag/meta"
 
 function AdminPage() {
     const [currentUser, setCurrentUser] = useState(auth.currentUser)
@@ -25,6 +26,11 @@ function AdminPage() {
     })
 
     useEffect(() => {
+        setMetaTags({
+            title: "유튜버 맛집 지도 어드민페이지",
+            description: "유튜버들이 방문한 식당데이터를 저장하는 곳입니다",
+            imageUrl: ""
+        })
         if (!currentUser) {
             alert("유저없음!")
             navigator("/login")

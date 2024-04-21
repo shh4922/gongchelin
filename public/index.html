@@ -1,36 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
 
-<head>
-  <meta charset="utf-8" />
+    <!-- 페이지별 메타태그 -->
+    <meta name="title" property="og:title" content="" />
+    <meta name="description" property="og:description" content="" />
+    <meta name="image" property="og:image" content="%PUBLIC_URL%/logo.png" />
+    <meta name="url" property="og:url" content="" />
 
-  <!-- 아이콘 -->
-  <link rel="icon" href="%PUBLIC_URL%/foodfavicon.png" />
-  <meta name="description" content="유튜버들이 다녀간 맛집을 정리하여 올려드립니다." />
-  <meta name="keywords" content="유튜버맛집, 유튜버먹방, 맛집지도, 먹방지도, 유튜버지도" />
+    <!-- 아이콘 -->
+    <link rel="icon" href="%PUBLIC_URL%/foodfavicon.png" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#000000" />
+    <meta
+      name="keywords"
+      content="유튜버맛집, 유튜버먹방, 맛집지도, 먹방지도, 유튜버지도"
+    />
 
-  <link rel="apple-touch-icon" href="%PUBLIC_URL%/foodfavicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
 
-  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/foodfavicon.png" />
 
-  <!-- 카카오맵 -->
-  <script type="text/javascript"
-    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=%REACT_APP_KAKAO_JSKEY%&libraries=services,clusterer"></script>
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
-  <title>유튜브 맛집먹지도</title>
+    <!-- 카카오맵 -->
+    <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=%REACT_APP_KAKAO_JSKEY%&libraries=services,clusterer"
+    ></script>
 
-  <!-- jmtmap.co.kr 광고코드 -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7588520360070945"
-    crossorigin="anonymous"></script>
-    
-</head>
+    <title>유튜브 맛집먹지도</title>
 
-<body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root"></div>
-</body>
+    <!-- jmtmap.co.kr 광고코드 -->
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7588520360070945"
+      crossorigin="anonymous"
+    ></script>
+  </head>
 
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+  </body>
 </html>

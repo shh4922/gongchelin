@@ -9,6 +9,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import "./search.scss"
 import storesInfo from '../../Models/\bstoresInfo';
+import { setMetaTags } from '../../metatag/meta';
 
 function Search() {
     const [stores, setStores] = useState<storesInfo[]>([]) // 모든식당정보
@@ -23,6 +24,7 @@ function Search() {
             description: "유튜버들이 소개한 맛집정보를 제공합니다",
             imageUrl: ""
         })
+
         fetchStores()
     }, [])
 
@@ -90,6 +92,7 @@ function Search() {
                     <option value="Gongchelin">공혁준</option>
                     <option value="Foogja">또간집</option>
                 </select>
+
                 <select onChange={handleCategoryChange}>
                     <option value="">전체</option>
                     <option value="한식">한식</option>
@@ -119,9 +122,9 @@ function Search() {
                         stores.map((store) => {
                             const isFilteredByYoutuber = !filteredYoutuber || store.youtuberName === filteredYoutuber;
                             const isFilteredByCategory = !filteredCategory || store.category === filteredCategory;
-                            
+
                             if (isFilteredByYoutuber && isFilteredByCategory) {
-                                if(!searchInput || store.eatedFood.includes(searchInput)){
+                                if (!searchInput || store.eatedFood.includes(searchInput)) {
                                     return (
                                         <EventMarkerContainer key={store.storeName} myStore={store} selectedStore={selectedStore} markerClickEvent={() => setSelectedStore(store)} />
                                     );

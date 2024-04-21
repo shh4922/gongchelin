@@ -45,10 +45,10 @@ const EventMarkerContainer: React.FC<MapMarkerProps> = ({ myStore, selectedStore
                     >
                         <section className='clicked-marker'>
                             <a href={myStore.youtubeLink} rel="noreferrer noopener" target='_blank'>
-                                <img src={getThumbnail(myStore.youtubeLink)} loading='lazy'></img>
+                                <img src={getThumbnail(myStore.youtubeLink)} loading='lazy' alt='유튜브 바로가기'></img>
                             </a>
                             <div className='clicked-marker-info'>
-                                
+
                                 <strong className='marker-name'>{myStore.storeName}</strong>
                                 <p>{myStore.address}</p>
                                 <p>{myStore.eatedFood}</p>

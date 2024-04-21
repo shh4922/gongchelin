@@ -17,8 +17,8 @@ function SelectedDetail({ selectedStore }: SelectedDetailProps) {
                     <p>{selectedStore.eatedFood}</p>
                 </section>
                 <a href={selectedStore.youtubeLink} rel="noreferrer noopener" target='_blank'>
-                    
-                    <img src={getLargeThumbnail(selectedStore.youtubeLink)} loading='lazy'></img>
+
+                    <img src={getLargeThumbnail(selectedStore.youtubeLink)} loading='lazy' alt="유튜브 바로가기"></img>
                 </a>
             </div>
         )

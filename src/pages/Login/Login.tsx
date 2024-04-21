@@ -1,9 +1,10 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import "./login.css"
 import { auth } from "../../db/firebase"
 
 import { signInWithEmailAndPassword, } from "firebase/auth"
 import { useNavigate } from "react-router-dom"
+import { setMetaTags } from "../../metatag/meta"
 
 
 function Login() {
@@ -13,6 +14,13 @@ function Login() {
 
     const navigator = useNavigate()
 
+    useEffect(() => {
+        setMetaTags({
+            title: "유튜버 맛집 지도 로그인페이지",
+            description: "유튜버 맛집지도 로그인페이지",
+            imageUrl: ""
+        })
+    }, [])
 
     const handleEmailInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value)
