@@ -14,10 +14,9 @@ function SelectedDetail({ selectedStore }: SelectedDetailProps) {
                     <strong className='marker-name'>{selectedStore.storeName}</strong>
                     <span className='marker-address'>{selectedStore.address}</span>
                     <p className='marker-category'>{selectedStore.category}</p>
-                    <p>{selectedStore.eatedFood}</p>
+                    <p>먹은음식: {selectedStore.eatedFood}</p>
                 </section>
                 <a href={selectedStore.youtubeLink} rel="noreferrer noopener" target='_blank'>
-
                     <img src={getLargeThumbnail(selectedStore.youtubeLink)} loading='lazy' alt="유튜브 바로가기"></img>
                 </a>
             </div>
