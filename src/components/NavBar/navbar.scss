@@ -1,29 +1,29 @@
 .navbar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
-    // height: 5%;
-    
-    .navbar-content {
-        width: 100%;
-        max-width: 1920px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  // height: 5%;
 
-        a {
-            h1 {
-                width: 100%;
-                font-size: 2.4rem;
-                color: black;
-                
-            }
-        }
-        
-        p {
-            font-size: 1.4rem;
-        }
+  .navbar-content {
+    width: 100%;
+    max-width: 1920px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+
+    a {
+      font-size: 1.6rem;
+      color: black;
+      h1 {
+        width: 100%;
+        font-size: 2.4rem;
+      }
     }
+
+    p {
+      font-size: 1.4rem;
+    }
+  }
 }

@@ -51,7 +51,6 @@ const EventMarkerContainer: React.FC<MapMarkerProps> = ({ myStore, selectedStore
 
                                 <strong className='marker-name'>{myStore.storeName}</strong>
                                 <p>{myStore.address}</p>
-                                {/* <p>{myStore.eatedFood}</p> */}
                             </div>
 
                         </section>
