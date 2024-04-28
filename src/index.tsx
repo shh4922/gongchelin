@@ -2,24 +2,26 @@ import ReactDOM, { createRoot, hydrateRoot } from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
-// import { hydrate, render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
 
 
-// const root = ReactDOM.createRoot(
-//   document.getElementById('root') as HTMLElement
-// );
 const rootElement = document.getElementById('root') as HTMLElement
 
 if (rootElement.hasChildNodes()) {
   const root = hydrateRoot(rootElement,
     <BrowserRouter>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </BrowserRouter>)
 } else {
   const root = createRoot(rootElement)
   root.render(
     <BrowserRouter>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </BrowserRouter>
   )
 }

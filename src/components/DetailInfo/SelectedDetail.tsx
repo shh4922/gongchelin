@@ -1,12 +1,11 @@
-import storesInfo from "../../Models/\bstoresInfo";
 import { getLargeThumbnail } from "../../share/youtube";
-// import "./selectedDetail.css"
 import "./selectedDetail.scss"
-interface SelectedDetailProps {
-    selectedStore: storesInfo | null;
-}
+import { useAppSelector } from "../../redux/store";
 
-function SelectedDetail({ selectedStore }: SelectedDetailProps) {
+function SelectedDetail() {
+    
+    const { selectedStore } = useAppSelector((state) => state.map);
+
     if (selectedStore !== null) {
         return (
             <div className="search-detail">

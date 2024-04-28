@@ -3,18 +3,24 @@ import { MapMarker, useMap, CustomOverlayMap } from 'react-kakao-maps-sdk';
 import storesInfo from '../../Models/\bstoresInfo';
 import { getThumbnail } from '../../share/youtube';
 import "./mapmarker.scss"
+import { useDispatch } from 'react-redux';
+import { handleClickMap, setSelectedStore } from '../../redux/mapSlice'; // Import actions and thunks
+import { useAppSelector } from '../../redux/store';
+
 interface MapMarkerProps {
     myStore: storesInfo,
-    selectedStore: storesInfo | null,
-    markerClickEvent: () => void
 }
 
-const EventMarkerContainer: React.FC<MapMarkerProps> = ({ myStore, selectedStore, markerClickEvent }) => {
+const EventMarkerContainer: React.FC<MapMarkerProps> = ({myStore}) => {
+    
     const map = useMap()
     const [isNameVisible, setIsVisible] = useState(false)
+    
+    const { selectedStore } = useAppSelector((state) => state.map);
+    const dispatch = useDispatch()
 
     const handleClickMarker = (marker: kakao.maps.Marker) => {
-        markerClickEvent()
+        dispatch(setSelectedStore(myStore))
         map.panTo(marker.getPosition())
     }
 

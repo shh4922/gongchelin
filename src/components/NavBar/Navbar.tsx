@@ -10,7 +10,7 @@ function Navbar() {
         <header className='navbar'>
             <div className='navbar-content'>
                 <Link to={"/"}><h1>유튜브 맛집 지도</h1></Link>
-                <Link to={"/contact"}>Contact</Link>
+                {/* <Link to={"/contact"}>Contact</Link> */}
             </div>
         </header>
     );

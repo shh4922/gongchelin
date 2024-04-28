@@ -1,99 +1,52 @@
 import React, { useEffect, useState } from 'react';
 import { Map } from 'react-kakao-maps-sdk';
-import { db } from '../../db/firebase';
-import { get, child, ref } from "firebase/database"
-
+import { db,getFoogja, getGongchelin} from '../../db/firebase';
 import EventMarkerContainer from '../../components/MapMarker/EventMarkerContainer';
 import SelectedDetail from '../../components/DetailInfo/SelectedDetail';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import "./search.scss"
-import storesInfo from '../../Models/\bstoresInfo';
 import { setMetaTags } from '../../metatag/meta';
+import { fetchStores, handleCategoryChange, handleYoutuberChange, handleSearchInput, handleClickMap } from '../../redux/mapSlice'; // Import actions and thunks
+import { useAppDispatch, useAppSelector } from '../../redux/store';
 
 function Search() {
-    const [stores, setStores] = useState<storesInfo[]>([]) // 모든식당정보
-    const [selectedStore, setSelectedStore] = useState<storesInfo | null>(null) // 선택한 식당정보
-    const [filteredCategory, setFilteredCategory] = useState<string>(""); // 카테고리 default는 전체
-    const [filteredYoutuber, setFilteredYoutuber] = useState<string>("")
-    const [searchInput, setSearchInput] = useState<string>("")
-
+    const { stores, filteredCategory, filteredYoutuber, searchInput } = useAppSelector((state) => state.map);
+    const dispatch = useAppDispatch()
+    
     useEffect(() => {
         setMetaTags({
             title: "유튜버 맛집 지도",
             description: "유튜버들이 소개한 맛집정보를 제공합니다",
             imageUrl: ""
         })
-
-        fetchStores()
-    }, [])
-
-    const fetchStores = async () => {
-        try {
-            const [gongChelin, foogja] = await Promise.all([
-                getGongchelin(),
-                getFoogja()
-            ]);
-
-            const combineData: storesInfo[] = [...gongChelin, ...foogja];
-            setStores(combineData);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    }
-
-    // fetch() 공혁준데이터
-    const getGongchelin = async (): Promise<storesInfo[]> => {
-        const snapshot = await get(child(ref(db), `Gongchelin`))
-        if (snapshot.exists()) {
-            const result = snapshot.val()
-            return Object.values(result)
-        } else {
-            console.log("No data available");
-            return []
-        }
-    }
-
-    // fetch() 풍자데이터
-    const getFoogja = async (): Promise<storesInfo[]> => {
-        const snapshot = await get(child(ref(db), `Foogja`))
-        if (snapshot.exists()) {
-            const result = snapshot.val()
-            return Object.values(result)
-        } else {
-            console.log("No data available");
-            return []
-        }
-    }
+        dispatch(fetchStores())
+    }, [dispatch])
 
     // 카테고리 필터링
-    const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setFilteredCategory(event.target.value);
+    const onChangeCategory = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        dispatch(handleCategoryChange(event.target.value))
+        // setFilteredCategory(event.target.value);
     };
     // 유튜버 필터링
-    const handleYoutuberChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setFilteredYoutuber(event.target.value);
+    const onChangeYoutuber = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        dispatch(handleYoutuberChange(event.target.value))
     };
     // 검색 필터링
-    const handleSearchInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchInput(event.target.value)
-    }
-
-    // 마커없는 맵 클릭
-    const handleClickMap = () => {
-        setSelectedStore(null)
+    const onChangeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+        dispatch(handleSearchInput(event.target.value))
     }
 
     return (
         <article className="Search">
             <section className='search-option'>
-                <select onChange={handleYoutuberChange}>
+                <select onChange={onChangeYoutuber}>
                     <option value="">모든유튜버</option>
                     <option value="Gongchelin">공혁준</option>
                     <option value="Foogja">또간집</option>
                 </select>
 
-                <select onChange={handleCategoryChange}>
+                <select onChange={onChangeCategory}>
                     <option value="">전체</option>
                     <option value="한식">한식</option>
                     <option value="중식">중식</option>
@@ -107,7 +60,7 @@ function Search() {
                     <option value="디저트">디저트</option>
                 </select>
                 <div className='search-input'>
-                    <input value={searchInput} onChange={handleSearchInput} placeholder='음식종류를 입력하세요'></input>
+                    <input value={searchInput} onChange={onChangeSearch} placeholder='음식종류를 입력하세요'></input>
                     <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon>
                 </div>
             </section>
@@ -116,7 +69,7 @@ function Search() {
                 <Map
                     className='search-map'
                     center={{ lat: 37.6703077, lng: 126.762765 }}
-                    onClick={handleClickMap}
+                    onClick={() => {dispatch(handleClickMap()) }}
                 >
                     {
                         stores.map((store) => {
@@ -126,7 +79,7 @@ function Search() {
                             if (isFilteredByYoutuber && isFilteredByCategory) {
                                 if (!searchInput || store.eatedFood.includes(searchInput)) {
                                     return (
-                                        <EventMarkerContainer key={store.storeName} myStore={store} selectedStore={selectedStore} markerClickEvent={() => setSelectedStore(store)} />
+                                        <EventMarkerContainer key={store.storeName} myStore={store} />
                                     );
                                 }
                             } else {
@@ -135,9 +88,7 @@ function Search() {
                         })
                     }
                 </Map>
-
-                <SelectedDetail selectedStore={selectedStore} />
-
+                <SelectedDetail />
             </section>
         </article>
     );
