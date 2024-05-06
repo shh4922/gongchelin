@@ -1,32 +1,93 @@
+
 .Contact {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1920px;
+  margin-top: 2rem;
+  gap: 2rem;
+  
+  h3{
+    font-size: 3rem;
+    color: gray;
+  }
+  a{
+    color: #1D2939;
+    font-size: 3rem;
+    
+  }
 
-  .contact-content {
-    // background-color: aquamarine;
-    width: 300px;
-    height: 200px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    padding: 1rem 2rem;
+  .youtuberList {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 2rem;
     border-radius: 10px;
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-    }
-    section {
+    box-shadow: 1px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    gap: 0.8rem;
+  }
+  
+  .devInfo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 2rem;
+    border-radius: 10px;
+    box-shadow: 1px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    gap: 1rem;
+
+    div {
+      width: 100%;
       display: flex;
-      flex-direction: column;
-      gap: 10px;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+
+  p {
+    font-size: 2rem;
+    color: gray;
+  }
+
+  strong {
+    font-size: 2.5rem;
+    color: #1D2939;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .Contact {
+    flex-direction: column;
+    justify-content: flex-start;
+    
+    h3 {
+      font-size: 2rem;
+    }
+    p {
+      font-size: 1.5rem;
+      color: gray;
+    }
+  
+    strong {
+      font-size: 1.7rem;
+      color: #1D2939;
+    } 
+    .youtuberList {
+      align-items: flex-start;
+      box-shadow: none;
+      border-radius: 0;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid gray;
     }
 
-    p {
-      width: 40%;
-      font-size: 1.3rem;
+    .devInfo {
+      align-items: flex-start;
+      box-shadow: none;
     }
-    strong {
-      width: 70%;
-      font-size: 1.6rem;
-    }
+    
   }
 }

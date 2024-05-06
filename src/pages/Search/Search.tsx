@@ -1,32 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import { Map } from 'react-kakao-maps-sdk';
-import { db,getFoogja, getGongchelin} from '../../db/firebase';
+import React, { useEffect } from 'react';
+import { CustomOverlayMap, Map, MapMarker } from 'react-kakao-maps-sdk';
 import EventMarkerContainer from '../../components/MapMarker/EventMarkerContainer';
 import SelectedDetail from '../../components/DetailInfo/SelectedDetail';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import "./search.scss"
 import { setMetaTags } from '../../metatag/meta';
-import { fetchStores, handleCategoryChange, handleYoutuberChange, handleSearchInput, handleClickMap } from '../../redux/mapSlice'; // Import actions and thunks
+import { fetchStores, handleCategoryChange, handleYoutuberChange, handleSearchInput, handleClickMap } from '../../redux/slice/mapSlice'; // Import actions and thunks
 import { useAppDispatch, useAppSelector } from '../../redux/store';
+import { setMyLocation } from '../../redux/slice/myLocationSlice';
 
+// NOTE 현재위치 받아와서 카카오맵으로 이동경로 보여주기.
 function Search() {
     const { stores, filteredCategory, filteredYoutuber, searchInput } = useAppSelector((state) => state.map);
+    // const { myX, myY } = useAppSelector((state) => state.myLocation)
     const dispatch = useAppDispatch()
-    
+
     useEffect(() => {
         setMetaTags({
             title: "유튜버 맛집 지도",
             description: "유튜버들이 소개한 맛집정보를 제공합니다",
             imageUrl: ""
         })
-        dispatch(fetchStores())
+        dispatch(fetchStores())        
     }, [dispatch])
 
     // 카테고리 필터링
     const onChangeCategory = (event: React.ChangeEvent<HTMLSelectElement>) => {
         dispatch(handleCategoryChange(event.target.value))
-        // setFilteredCategory(event.target.value);
     };
     // 유튜버 필터링
     const onChangeYoutuber = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -36,7 +37,9 @@ function Search() {
     const onChangeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(handleSearchInput(event.target.value))
     }
-
+    
+    
+    
     return (
         <article className="Search">
             <section className='search-option'>
@@ -68,8 +71,8 @@ function Search() {
             <section className='search-body'>
                 <Map
                     className='search-map'
-                    center={{ lat: 37.6703077, lng: 126.762765 }}
-                    onClick={() => {dispatch(handleClickMap()) }}
+                    center={{ lng: 126.762765, lat:  37.6703077 }}
+                    onClick={() => { dispatch(handleClickMap()) }}
                 >
                     {
                         stores.map((store) => {
@@ -95,3 +98,26 @@ function Search() {
 }
 
 export default Search; 
+
+// 현재위치 받아오기
+        // navigator.geolocation.getCurrentPosition(
+        //     (position) => {
+        //         dispatch(setMyLocation({ longitude: position.coords.longitude, latitude: position.coords.latitude }))
+        //     },
+        //     (err) => {
+        //         dispatch(setMyLocation({ longitude: 37.6703077, latitude: 126.762765 }))
+        //     }
+        // );
+
+// </CustomOverlayMap>
+{/* 내 위치좌표 */}
+{/* <MapMarker
+position={{ lng: myX ?? 126.762765, lat: myY ?? 37.6703077 }} // 마커를 표시할 위치
+/>
+<CustomOverlayMap
+position={{ lng: myX ?? 126.762765, lat: myY ?? 37.6703077 }} // 마커를 표시할 위치
+yAnchor={2.2}
+clickable={true}
+>
+<p className='myLocation'>내위치!</p>
+<button onClick={moveToMap}>하잉</button> */}

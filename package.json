@@ -42,7 +42,13 @@
     "include": [
       "/",
       "/login",
-      "/admin"
+      "/admin",
+      "/contact",
+      "/readme",
+      "/updateBoard",
+      "/info/1",
+      "/info/2",
+      "/info/3"
     ]
   },
   "eslintConfig": {

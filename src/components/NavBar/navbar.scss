@@ -5,6 +5,24 @@
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
   // height: 5%;
 
+  a {
+    font-size: 1.7rem;
+    font-weight: 500;
+    color: black;
+
+    h1 {
+      width: 100%;
+      font-size: 2.4rem;
+    }
+  }
+  a:hover {
+    color: brown;
+  }
+
+  p {
+    font-size: 1.4rem;
+  }
+
   .navbar-content {
     width: 100%;
     max-width: 1920px;
@@ -12,18 +30,11 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
-
-    a {
-      font-size: 1.6rem;
-      color: black;
-      h1 {
-        width: 100%;
-        font-size: 2.4rem;
-      }
-    }
-
-    p {
-      font-size: 1.4rem;
-    }
+  }
+  
+  nav {
+    display: flex;
+    gap: 1.5rem;
   }
 }
+

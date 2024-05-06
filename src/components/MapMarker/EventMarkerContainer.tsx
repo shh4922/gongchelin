@@ -4,7 +4,7 @@ import storesInfo from '../../Models/\bstoresInfo';
 import { getThumbnail } from '../../share/youtube';
 import "./mapmarker.scss"
 import { useDispatch } from 'react-redux';
-import { handleClickMap, setSelectedStore } from '../../redux/mapSlice'; // Import actions and thunks
+import { handleClickMap, setSelectedStore } from '../../redux/slice/mapSlice'; // Import actions and thunks
 import { useAppSelector } from '../../redux/store';
 
 interface MapMarkerProps {
@@ -23,7 +23,16 @@ const EventMarkerContainer: React.FC<MapMarkerProps> = ({myStore}) => {
         dispatch(setSelectedStore(myStore))
         map.panTo(marker.getPosition())
     }
-
+    
+    const moveToKakaoMap = () => {
+        console.log(selectedStore?.x)
+        console.log(selectedStore?.y)
+        https://map.kakao.com/link/to/카카오판교오피스,37.402056,127.108212
+        // window.location.replace(`https://map.kakao.com/link/map/${selectedStore?.storeName},${selectedStore?.y},${selectedStore?.x}`);
+        window.location.replace(`	kakaomap://search?q=맛집&p=${selectedStore?.y},${selectedStore?.x}`);
+        
+        // window.location.replace(`https://map.kakao.com/link/map/${selectedStore?.y},${selectedStore?.x}`);
+    }
     return (
         <>
             <MapMarker
@@ -54,11 +63,10 @@ const EventMarkerContainer: React.FC<MapMarkerProps> = ({myStore}) => {
                                 <img src={getThumbnail(myStore.youtubeLink)} loading='lazy' alt='유튜브 바로가기'></img>
                             </a>
                             <div className='clicked-marker-info'>
-
                                 <strong className='marker-name'>{myStore.storeName}</strong>
                                 <p>{myStore.address}</p>
+                                <button onClick={moveToKakaoMap}>카카오맵으로 길찾기</button>
                             </div>
-
                         </section>
                     </CustomOverlayMap>
                 )

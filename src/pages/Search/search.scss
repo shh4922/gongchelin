@@ -3,8 +3,7 @@
     height: 100%;
     max-width: 1720px;
     padding: 1rem 2rem;
-    // background-color: blue;
-    // overflow: hidden;
+    
     .search-option {
         display: flex;
         align-items: center;
@@ -49,8 +48,15 @@
             height: 100%;
             border-radius: 10px;
             box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+            .myLocation {
+                padding: 10px;
+                background-color: red;
+                border-radius: 8px;
+                font-size: 14;
+                color: #fff;
+            }
         }
 
-        
     }
 }
