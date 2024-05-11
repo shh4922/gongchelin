@@ -8,14 +8,10 @@ import Contact from '../Contact/Contact';
 import Info from '../info/Info';
 import UpdateBoard from '../updateBoard/UpdateBoard';
 import ReadMe from '../ReadMe/ReadMe';
+import Foogja from '../Foogja/Foogja';
 
 function Main() {
-    // const routes = [
-    //     {path: '/', element: <Search />},
-    //     {path: '/login', element: <Login />},
-    // ];
     
-    // const router = createBrowserRouter(routes);
     
     return (
         <main>

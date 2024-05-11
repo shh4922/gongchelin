@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MapMarker, useMap, CustomOverlayMap } from 'react-kakao-maps-sdk';
+import { MapMarker, useMap, CustomOverlayMap, MarkerClusterer } from 'react-kakao-maps-sdk';
 import storesInfo from '../../Models/\bstoresInfo';
 import { getThumbnail } from '../../share/youtube';
 import "./mapmarker.scss"
@@ -11,11 +11,11 @@ interface MapMarkerProps {
     myStore: storesInfo,
 }
 
-const EventMarkerContainer: React.FC<MapMarkerProps> = ({myStore}) => {
-    
+const EventMarkerContainer: React.FC<MapMarkerProps> = ({ myStore }) => {
+
     const map = useMap()
     const [isNameVisible, setIsVisible] = useState(false)
-    
+
     const { selectedStore } = useAppSelector((state) => state.map);
     const dispatch = useDispatch()
 
@@ -23,44 +23,41 @@ const EventMarkerContainer: React.FC<MapMarkerProps> = ({myStore}) => {
         dispatch(setSelectedStore(myStore))
         map.panTo(marker.getPosition())
     }
-    
+
     const moveToKakaoMap = () => {
-        console.log(selectedStore?.x)
-        console.log(selectedStore?.y)
-        https://map.kakao.com/link/to/카카오판교오피스,37.402056,127.108212
-        // window.location.replace(`https://map.kakao.com/link/map/${selectedStore?.storeName},${selectedStore?.y},${selectedStore?.x}`);
-        window.location.replace(`	kakaomap://search?q=맛집&p=${selectedStore?.y},${selectedStore?.x}`);
-        
-        // window.location.replace(`https://map.kakao.com/link/map/${selectedStore?.y},${selectedStore?.x}`);
+        window.location.replace(`kakaomap://search?q=${selectedStore?.storeName}&p=${selectedStore?.y},${selectedStore?.x}`);
     }
+
     return (
         <>
-            <MapMarker
-                position={{ lat: myStore.y, lng: myStore.x }} // 마커를 표시할 위치
-                onClick={handleClickMarker}
-                onMouseOver={() => setIsVisible(true)}
-                onMouseOut={() => setIsVisible(false)}
-            />
-            {
-                isNameVisible && (
-                    <CustomOverlayMap
-                        position={{ lat: myStore.y, lng: myStore.x }} // 마커를 표시할 위치
-                        yAnchor={2.6}
-                    >
-                        <p className='hover-marker'>{myStore.storeName}</p>
-                    </CustomOverlayMap>
-                )
-            }
+            {/* css에서 처리하게도 가능 .visible처럼 */}
+
+            <CustomOverlayMap
+                position={{ lat: myStore.y, lng: myStore.x }}
+            // yAnchor={4}
+            >
+                {
+                    isNameVisible && (
+                        <p className="hover-marker">{myStore.storeName}</p>
+                    )
+                }
+                <MapMarker
+                    position={{ lat: myStore.y, lng: myStore.x }}
+                    onClick={handleClickMarker}
+                    onMouseOver={() => setIsVisible(true)} // 마우스 오버 이벤트 추가
+                    onMouseOut={() => setIsVisible(false)} // 마우스 아웃 이벤트 추가
+                />
+            </CustomOverlayMap>
             {
                 myStore.storeName === selectedStore?.storeName && (
                     <CustomOverlayMap
-                        position={{ lat: myStore.y, lng: myStore.x }} // 마커를 표시할 위치
-                        yAnchor={1.3}
+                        position={{ lat: myStore.y, lng: myStore.x }}
+                        yAnchor={1.2}
                         clickable={true}
                     >
                         <section className='clicked-marker'>
                             <a href={myStore.youtubeLink} rel="noreferrer noopener" target='_blank'>
-                                <img src={getThumbnail(myStore.youtubeLink)} loading='lazy' alt='유튜브 바로가기'></img>
+                                <img src={getThumbnail(myStore.youtubeLink)} loading='lazy' alt='유튜브 바로가기' />
                             </a>
                             <div className='clicked-marker-info'>
                                 <strong className='marker-name'>{myStore.storeName}</strong>
@@ -72,6 +69,8 @@ const EventMarkerContainer: React.FC<MapMarkerProps> = ({myStore}) => {
                 )
             }
         </>
+
+        
     )
 }
 

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { CustomOverlayMap, Map, MapMarker } from 'react-kakao-maps-sdk';
+import { CustomOverlayMap, Map, MapMarker, MarkerClusterer } from 'react-kakao-maps-sdk';
 import EventMarkerContainer from '../../components/MapMarker/EventMarkerContainer';
 import SelectedDetail from '../../components/DetailInfo/SelectedDetail';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
@@ -22,7 +22,7 @@ function Search() {
             description: "유튜버들이 소개한 맛집정보를 제공합니다",
             imageUrl: ""
         })
-        dispatch(fetchStores())        
+        dispatch(fetchStores())
     }, [dispatch])
 
     // 카테고리 필터링
@@ -37,9 +37,9 @@ function Search() {
     const onChangeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(handleSearchInput(event.target.value))
     }
-    
-    
-    
+
+
+
     return (
         <article className="Search">
             <section className='search-option'>
@@ -71,25 +71,32 @@ function Search() {
             <section className='search-body'>
                 <Map
                     className='search-map'
-                    center={{ lng: 126.762765, lat:  37.6703077 }}
+                    center={{ lng: 126.762765, lat: 37.6703077 }}
                     onClick={() => { dispatch(handleClickMap()) }}
                 >
-                    {
-                        stores.map((store) => {
-                            const isFilteredByYoutuber = !filteredYoutuber || store.youtuberName === filteredYoutuber;
-                            const isFilteredByCategory = !filteredCategory || store.category === filteredCategory;
+                    <MarkerClusterer
+                        averageCenter={true}
+                        minLevel={6}
+                    >
+                        {
+                            stores.map((store) => {
+                                const isFilteredByYoutuber = !filteredYoutuber || store.youtuberName === filteredYoutuber;
+                                const isFilteredByCategory = !filteredCategory || store.category === filteredCategory;
 
-                            if (isFilteredByYoutuber && isFilteredByCategory) {
-                                if (!searchInput || store.eatedFood.includes(searchInput)) {
-                                    return (
-                                        <EventMarkerContainer key={store.storeName} myStore={store} />
-                                    );
+                                
+                                if (isFilteredByYoutuber && isFilteredByCategory) {
+                                    if (!searchInput || store.eatedFood.includes(searchInput)) {
+                                        return (
+                                            <EventMarkerContainer key={store.storeName} myStore={store} />
+                                        );
+                                    }
+                                } else {
+                                    return null;
                                 }
-                            } else {
-                                return null;
-                            }
-                        })
-                    }
+                            })
+                        }
+                    </MarkerClusterer>
+
                 </Map>
                 <SelectedDetail />
             </section>
@@ -97,27 +104,5 @@ function Search() {
     );
 }
 
-export default Search; 
+export default Search;
 
-// 현재위치 받아오기
-        // navigator.geolocation.getCurrentPosition(
-        //     (position) => {
-        //         dispatch(setMyLocation({ longitude: position.coords.longitude, latitude: position.coords.latitude }))
-        //     },
-        //     (err) => {
-        //         dispatch(setMyLocation({ longitude: 37.6703077, latitude: 126.762765 }))
-        //     }
-        // );
-
-// </CustomOverlayMap>
-{/* 내 위치좌표 */}
-{/* <MapMarker
-position={{ lng: myX ?? 126.762765, lat: myY ?? 37.6703077 }} // 마커를 표시할 위치
-/>
-<CustomOverlayMap
-position={{ lng: myX ?? 126.762765, lat: myY ?? 37.6703077 }} // 마커를 표시할 위치
-yAnchor={2.2}
-clickable={true}
->
-<p className='myLocation'>내위치!</p>
-<button onClick={moveToMap}>하잉</button> */}

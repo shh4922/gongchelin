@@ -1,11 +1,17 @@
 import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import "./info.scss"
+import { setMetaTags } from "../../metatag/meta"
 
 function Info() {
     const param = useParams()
     useEffect(() => {
-        console.log(param.id)
+        setMetaTags({
+            title: "유튜버 맛집 지도",
+            description: "유튜버맛집지도 유튜버정보",
+            imageUrl: ""
+        })
+        
     }, [])
 
     function dummyReturn() {
