@@ -17,12 +17,17 @@ function UpdateBoard() {
         <article className="updateboard">
             <h2>업데이트 내역</h2>
             <section>
+                <strong>240512</strong>
+                <ul>
+                    <li>마커개수 표기방법 변경</li>
+                    
+                </ul>
+            </section>
+            <section>
                 <strong>240507</strong>
                 <ul>
                     <li>카카오맵으로 이동하기 추가함</li>
                 </ul>
-
-                
             </section>
             <section>
                 <strong>240425</strong>

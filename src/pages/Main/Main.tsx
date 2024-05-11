@@ -8,7 +8,6 @@ import Contact from '../Contact/Contact';
 import Info from '../info/Info';
 import UpdateBoard from '../updateBoard/UpdateBoard';
 import ReadMe from '../ReadMe/ReadMe';
-import Foogja from '../Foogja/Foogja';
 
 function Main() {
     
