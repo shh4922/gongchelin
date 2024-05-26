@@ -2,6 +2,11 @@ main {
     display: flex;
     width: 100%;
     justify-content: center;
-    height: 95vh;
-    /* background-color: red; */
+    height: 96vh;
+}
+
+@media screen and (max-width:720px) {
+    main {
+        height: 100vh;
+    }
 }

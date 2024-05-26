@@ -1,7 +1,49 @@
 .Search {
     width: 100%;
     height: 100%;
-    max-width: 1720px;
+    margin: 0;
+    padding: 0;
+    position: relative;
+
+    
+
+    .aside-content {
+        z-index: 2;
+        width: 400px;
+        height: 100%;
+        display: flex;
+        position: absolute;
+        flex-direction: column;
+        transition: transform 0.3s ease-in-out;
+        padding: 1rem;
+        background-color: #fff;
+        border-right: 1px solid #98A2B3;
+
+        .search-input {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1rem;
+            border: 1px solid #ccc;
+
+            input {
+                flex: 1;
+                border: none;
+                outline: none;
+                font-size: 1.2rem;
+                padding: 0.5rem 0.1rem;
+            }
+        }
+
+        select {
+            padding: 1rem 0.5rem;
+            border: 1px solid #ccc;
+            font-size: 1.2rem;
+            color: gray;
+        }
+
+    }
+
+
 
 
     .search-option {
@@ -39,17 +81,12 @@
 
     .search-body {
         position: relative;
-        height: calc(100% - 6rem);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        width: 100%;
+        height: 100%;
 
         .search-map {
             width: 100%;
             height: 100%;
-            border-radius: 10px;
-            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
             .myLocation {
                 padding: 10px;
@@ -65,9 +102,8 @@
 
 @media screen and (max-width:720px) {
     .Search {
-        padding: 0 ;
-    }
-    .search-option{
-        padding: 0 0.5rem;
+        .aside-content {
+            display: none;
+        }
     }
 }

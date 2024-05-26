@@ -1,19 +1,19 @@
+import "./search.scss"
 import React, { useEffect } from 'react';
-import { CustomOverlayMap, Map, MapMarker, MarkerClusterer } from 'react-kakao-maps-sdk';
+import { Map } from 'react-kakao-maps-sdk';
 import EventMarkerContainer from '../../components/MapMarker/EventMarkerContainer';
 import SelectedDetail from '../../components/DetailInfo/SelectedDetail';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import "./search.scss"
 import { setMetaTags } from '../../metatag/meta';
 import { fetchStores, handleCategoryChange, handleYoutuberChange, handleSearchInput, handleClickMap } from '../../redux/slice/mapSlice'; // Import actions and thunks
 import { useAppDispatch, useAppSelector } from '../../redux/store';
-import { setMyLocation } from '../../redux/slice/myLocationSlice';
+import MobileNavTop from "../../components/MobileNavTop/MobileNavTop";
 
 // NOTE 현재위치 받아와서 카카오맵으로 이동경로 보여주기.
 function Search() {
     const { stores, filteredCategory, filteredYoutuber, searchInput } = useAppSelector((state) => state.map);
-    // const { myX, myY } = useAppSelector((state) => state.myLocation)
+
     const dispatch = useAppDispatch()
 
     useEffect(() => {
@@ -38,17 +38,19 @@ function Search() {
         dispatch(handleSearchInput(event.target.value))
     }
 
-
-
     return (
         <article className="Search">
-            <section className='search-option'>
+
+            <section className={`aside-content`}>
+                <div className='search-input'>
+                    <input value={searchInput} onChange={onChangeSearch} placeholder='음식종류를 입력하세요'></input>
+                    <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon>
+                </div>
                 <select onChange={onChangeYoutuber}>
                     <option value="">모든유튜버</option>
                     <option value="Gongchelin">공혁준</option>
                     <option value="Foogja">또간집</option>
                 </select>
-
                 <select onChange={onChangeCategory}>
                     <option value="">전체</option>
                     <option value="한식">한식</option>
@@ -62,44 +64,35 @@ function Search() {
                     <option value="면">면</option>
                     <option value="디저트">디저트</option>
                 </select>
-                <div className='search-input'>
-                    <input value={searchInput} onChange={onChangeSearch} placeholder='음식종류를 입력하세요'></input>
-                    <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon>
-                </div>
             </section>
-
+            <MobileNavTop/>
             <section className='search-body'>
                 <Map
+                    style={{ width: "100%", height: "100%" }}
+                    minLevel={12}
                     className='search-map'
                     center={{ lng: 126.762765, lat: 37.6703077 }}
-                    onClick={() => { dispatch(handleClickMap()) }}
-                >
-                    <MarkerClusterer
-                        averageCenter={true}
-                        minLevel={6}
-                    >
-                        {
-                            stores.map((store) => {
-                                const isFilteredByYoutuber = !filteredYoutuber || store.youtuberName === filteredYoutuber;
-                                const isFilteredByCategory = !filteredCategory || store.category === filteredCategory;
+                    onClick={() => { dispatch(handleClickMap()) }}>
 
-                                
-                                if (isFilteredByYoutuber && isFilteredByCategory) {
-                                    if (!searchInput || store.eatedFood.includes(searchInput)) {
-                                        return (
-                                            <EventMarkerContainer key={store.storeName} myStore={store} />
-                                        );
-                                    }
-                                } else {
-                                    return null;
+                    {
+                        stores.map((store) => {
+                            const isFilteredByYoutuber = !filteredYoutuber || store.youtuberName === filteredYoutuber;
+                            const isFilteredByCategory = !filteredCategory || store.category === filteredCategory;
+                            if (isFilteredByYoutuber && isFilteredByCategory) {
+                                if (!searchInput || store.eatedFood.includes(searchInput)) {
+                                    return (
+                                        <EventMarkerContainer key={store.storeName} myStore={store} />
+                                    );
                                 }
-                            })
-                        }
-                    </MarkerClusterer>
-
+                            } else {
+                                return null;
+                            }
+                        })
+                    }
                 </Map>
                 <SelectedDetail />
             </section>
+            
         </article>
     );
 }

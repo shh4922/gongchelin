@@ -1,0 +1,66 @@
+.mobile-nav-bottom {
+    display: none;
+}
+@media screen and (max-width:720px) {
+    .mobile-nav-bottom {
+        position: fixed;
+        bottom: 0;
+        justify-content: space-around;
+        align-items: center;
+        display: flex;
+        width: 100%;
+        height: 50px;
+        z-index: 2;
+
+        li {
+            width: 100%;
+            height: 100%;
+            border-right: 1px solid black;
+
+            &:last-child {
+                border-right: none;
+                /* 마지막 li 요소의 구분선을 제거 */
+            }
+
+            a {
+                display: block;
+                background-color: #fff;
+                width: 100%;
+                height: 100%;
+
+                div {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    height: 100%;
+                    gap: 5px;
+                    color: #98A2B3;
+
+                    svg {
+                        width: 18px;
+                        height: 18px;
+
+                    }
+
+                    p {
+                        font-size: 1.3rem;
+                    }
+                }
+
+            }
+
+            a.active {
+                color: black;
+
+                svg {
+                    color: black;
+                }
+
+                p {
+                    color: black;
+                }
+            }
+        }
+    }
+}

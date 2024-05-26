@@ -1,58 +1,30 @@
 .navbar {
   display: flex;
   align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-
-  h1 {
-
-    font-size: 2.4rem;
-  }
-
+  justify-content: space-between;
+  padding: 2rem 2rem;
+  border-bottom: 1px solid #98A2B3;
   a {
-    font-size: 1.7rem;
-    font-weight: 500;
-    color: black;
-
-
+    font-size: 2rem;
+    font-weight: 400;
+    color: #98A2B3;
   }
 
   a:hover {
     color: brown;
   }
 
-  .navbar-content {
-    width: 100%;
-    max-width: 1920px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-  }
-
   nav {
     display: flex;
     gap: 1.5rem;
+    a {
+      font-size: 1.7rem;
+    }
   }
 }
 
 @media screen and (max-width:720px) {
   .navbar {
-    h1 {
-      font-size: 2rem;
-    }
-
-    a {
-      font-size: 1.4rem;
-
-    }
-    
-    nav {
-      gap: 0.8rem;
-    }
-    .navbar-content {
-      padding: 1rem 1rem;
-    }
+    display: none;
   }
-
 }

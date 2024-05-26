@@ -10,8 +10,6 @@ import UpdateBoard from '../updateBoard/UpdateBoard';
 import ReadMe from '../ReadMe/ReadMe';
 
 function Main() {
-    
-    
     return (
         <main>
             <Routes>
