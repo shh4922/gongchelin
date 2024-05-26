@@ -17,10 +17,16 @@ function UpdateBoard() {
         <article className="updateboard">
             <h2>업데이트 내역</h2>
             <section>
+                <strong>240527</strong>
+                <ul>
+                    <li>마커개수 롤백</li>
+                    <li>모바일버전 화면 변경</li>
+                </ul>
+            </section>
+            <section>
                 <strong>240512</strong>
                 <ul>
                     <li>마커개수 표기방법 변경</li>
-                    
                 </ul>
             </section>
             <section>
