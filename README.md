@@ -10,6 +10,9 @@
 - firebase
 
 ### 미리보기
+![main](https://github.com/shh4922/gongchelin/assets/83321146/867acf3b-9d87-443e-9b4e-38d0b2b82a4a)
+
+![스크린샷 2024-06-22 오후 2 10 30](https://github.com/shh4922/gongchelin/assets/83321146/dbf7a3a4-99bc-4e6f-8fe5-1c72cca855b4)
 
 
 ### 사이트 바로가기
