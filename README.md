@@ -8,6 +8,7 @@
 - axios, redux-toolkit
 - aws-ec2
 - firebase
+- kakaoMapAPI, kakaoLocal api
 
 ### 미리보기
 ![main](https://github.com/shh4922/gongchelin/assets/83321146/867acf3b-9d87-443e-9b4e-38d0b2b82a4a)
